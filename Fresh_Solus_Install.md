@@ -66,7 +66,10 @@ sudo sed -i.bak -e '$a\' -e 'Compression=yes' -e '/Compression=.*/d' /etc/ssh/ss
 
 #### Install packages from standard repo (adjust list as needed)
 ```
-sudo eopkg install -y audacity calibre cifs-utils cmus conky curl davfs2 dbeaver deadbeef docker evolution feh fuse gimp htop inkscape iotop keepass lutris lxappearance lynx mc mpd mtr neofetch pavucontrol powertop ranger remmina scribus shellcheck sshfs-fuse steam terminator tlp umbrello unrar variety vim virt-manager virtualbox{,-current} vlc vscode wine zsh
+sudo eopkg install -y audacity calibre cifs-utils cmus conky curl davfs2 dbeaver deadbeef docker evolution 
+sudo eopkg install -y feh fuse gimp htop inkscape iotop keepass lutris lxappearance lynx mc mpd mtr neofetch 
+sudo eopkg install -y pavucontrol powertop ranger remmina scribus shellcheck sshfs-fuse steam terminator 
+sudo eopkg install -y tlp umbrello unrar variety vim virt-manager virtualbox{,-current} vlc vscode wine zsh
 ```
 
 #### Compile 3rd-party packages
