@@ -1,4 +1,4 @@
-Resources
+<h1>Resources</h1>
 
 Awesome Django
 https://github.com/shahraizali/awesome-django
