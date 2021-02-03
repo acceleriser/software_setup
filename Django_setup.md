@@ -1,22 +1,33 @@
-<h1>Resources</h1>
+# Setup Django test driven development backend with a Bootstrap frontend 
 
-Awesome Django
-https://github.com/shahraizali/awesome-django
-https://github.com/wsvincent/awesome-django
-https://awesomedjango.org/
+## Resources
+Awesome Django\
+https://github.com/shahraizali/awesome-django\
+https://github.com/wsvincent/awesome-django\
+https://awesomedjango.org
 
-Gitignore: use Toptal generator
+Gitignore: use Toptal generator\
 https://www.toptal.com/developers/gitignore
-for Django:
+gitignore for Django:\
 https://www.toptal.com/developers/gitignore/api/django
 
 
-Import Git version
-python3 -m venv env
-source env/bin/activate
-pip install -r requirements.txt
-python3 manage.py makemigrations
-python3 manage.py migrate
-python3 manage.py collectstatic
-python3 manage.py runserver
+## Install Django locally  
+
+
+## Produce the project locally  
+
+
+## Export the project to GitHub  
+
+
+## Webserver setup  
+### Import Git version  
+python3 -m venv venv  
+source venv/bin/activate  
+pip install -r requirements.txt  
+python3 manage.py makemigrations  
+python3 manage.py migrate  
+python3 manage.py collectstatic  
+python3 manage.py runserver  
 
