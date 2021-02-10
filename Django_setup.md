@@ -212,11 +212,127 @@ Add automated admin login test:
         self.assertIn('Groups', self.browser.page_source)
 
 ```
+*In admin.py:*
+``` python
+from django.contrib import admin
+from .models import Job
+
+# Register your models here.
+admin.site.register(Job)
+```
+
+## Inject Django code into the home page
+*In views.py add:*
+``` python
+from django.shortcuts import render
+from .models import Job
+
+# Create your views here.
+def home(request):
+    jobs = Job.objects
+    return render(request,'expafin/home.html', {'jobs': jobs})
+```
+*In home.html add:*
+``` html
+<h1>Portfolio</h1>
+
+{% for job in jobs.all %}
+<div>{{ job.summary }}</div>
+{% endfor %}
+```
+
+## Apply Bootstrap template to home page
+### Download bootstrap theme ###
+https://getbootstrap.com/docs/5.0/examples/album/  
+Just copy the page source into home.html
+### Download Bootstrap compiled CSS and JS
+https://getbootstrap.com/docs/5.0/getting-started/download/  
+Replace the compiled CSS reference into home.html:
+``` html
+<!-- Bootstrap core CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+```
+Replace the JS at the end of the page:  
+``` html
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+  </body>
+</html>
+```
+
+## Tweak Bootstrap template
+Adjust home.html:  
+- Head  
+- Header  
+- Footer  
+- Select body template
+
+## Add static
+- create folder static inside project (expafin) folder alongside templates folder
+- insert static template images into "static" folder
+- declare static folder in settings.py 
+``` python
+import os
+...
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+```
+- declare static urls in urls.py 
+``` python
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', views.home, name='home'),
+] + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
+```
+
+## Add and collect static content
+Add media files in the static project folder (the deep one, not the top static folder which is generated automatically).\
+Download CSS and JS files from https://getbootstrap.com/docs/5.0/getting-started/download/ and https://popper.js.org/ \
+Add CSS and JS folders into  the static project folder.\
+
+Colect static: run in terminal:
+```
+python manage.py collectstatic
+```
+Load startic content: in home.html, below html tag:
+```
+{% load static %} 
+```
+and use {% static 'static_file' %} syntax whenever necessary.
+
+## Specify static iamges folder
+In settings.py add:
+``` python
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR
+```
+in urls.py add media links; final results should look like:
+``` python
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', views.home, name='home'),
+] 
+urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
+```
+
+## Insert data from database
+For images: {{ job.image.url }}  
+For text: {{ job.detail }}  
+
+## Adjust admin panel
+In models.py add a model view function inside the model class definiton:
+``` python
+def __str__(self):
+        return self.summary
+```
+
+## Add detail urls
 
 
-## Apply Bootstrap to home page
-
-## Export the project to GitHub  
 
 
 ## Webserver setup  
